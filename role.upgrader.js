@@ -27,4 +27,3 @@ var roleUpgrader = {
 };
 
 module.exports = roleUpgrader;
- No newline at end of file
