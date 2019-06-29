@@ -21,8 +21,8 @@ module.exports = {
                 // the second argument for findClosestByPath is an object which takes
                 // a property called filter which can be a function
                 // we use the arrow operator to define it
-                filter: (s) => (s.structureType == STRUCTURE_SPAWN||
-                                s.structureType == STRUCTURE_EXTENSION||
+                filter: (s) => (s.structureType == STRUCTURE_EXTENSION||
+                                s.structureType == STRUCTURE_SPAWN||
                                 s.structureType == STRUCTURE_CONTAINER)&&
                                 s.energy < s.energyCapacity
             });
