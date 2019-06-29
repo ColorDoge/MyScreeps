@@ -1,3 +1,5 @@
+var roleUpgrader = require('role.upgrader')
+
 module.exports = {
     // a function to run the logic for this role
     run: function(creep) {
@@ -19,7 +21,10 @@ module.exports = {
                 // the second argument for findClosestByPath is an object which takes
                 // a property called filter which can be a function
                 // we use the arrow operator to define it
-                filter: (s) => s.energy < s.energyCapacity
+                filter: (s) => (s.structureType == STRUCTURE_SPAWN||
+                                s.structureType == STRUCTURE_EXTENSION||
+                                s.structureType == STRUCTURE_CONTAINER)&&
+                                s.energy < s.energyCapacity
             });
 
             // if we found one
@@ -29,6 +34,9 @@ module.exports = {
                     // move towards it
                     creep.moveTo(structure);
                 }
+            }
+            else{
+                roleUpgrader.run(creep);
             }
         }
         // if creep is supposed to harvest energy from source
