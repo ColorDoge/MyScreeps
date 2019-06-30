@@ -2,8 +2,11 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
+var roleCarrier = require('role.carrier');
 var defenderTower = require('defender.tower');
 var deathAndBirth = require('behavior.deathAndBirth');
+
+
 
 module.exports.loop = function () {
 
@@ -25,5 +28,8 @@ module.exports.loop = function () {
         if(creep.memory.role == 'repairer'){
             roleRepairer.run(creep);
         }
+        // if(creep.memory.role == 'carrier'){
+        //     roleCarrier.run(creep);
+        // }
     }
 }

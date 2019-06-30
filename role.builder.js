@@ -42,6 +42,34 @@ module.exports = {
                     // move towards the source
                     creep.moveTo(source);
                 }
+                else{
+                    var container = creep.pos.findClosestByPath(FIND_STRUCTURES,
+                        {filter: (s) => (
+                            s.structureType == STRUCTURE_CONTAINER &&
+                            s.store.energy < s.storeCapacity)});
+                    if(container != undefined)
+                    {
+                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
+                        {
+                            creep.moveTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
+                        }
+                    }
+                }
+
+                // var Energystructure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                //     filter: (s) => {
+                //         return (s.structureType == STRUCTURE_EXTENSION ||
+                //             s.structureType == STRUCTURE_SPAWN ||
+                //             s.structureType == STRUCTURE_CONTAINER) &&
+                //             s.energy > 0
+                //             || s.store > 0; }
+                //         });
+                //     if(Energystructure != undefined){
+                //         if (Energystructure.transferEnergy(creep) == ERR_NOT_IN_RANGE) {
+                //         // move towards it
+                //         creep.moveTo(Energystructure);
+                //     }
+                // }
         }
     }
 };
