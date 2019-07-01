@@ -43,6 +43,9 @@ module.exports = {
                     creep.moveTo(target);
                 }
             }
+            else{
+                roleRepairer.run(creep);
+            }
         }
         else {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
