@@ -27,7 +27,8 @@ module.exports = {
 
                 filter: (s) => {
                     return (s.structureType == STRUCTURE_EXTENSION ||
-                        s.structureType == STRUCTURE_SPAWN) &&
+                        s.structureType == STRUCTURE_SPAWN||
+                        s.structureType == STRUCTURE_TOWER) &&
                         s.energy < s.energyCapacity; }
             });
 

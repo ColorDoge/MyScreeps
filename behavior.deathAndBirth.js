@@ -11,8 +11,9 @@ var deathAndBirth = {
         }
 
         var energy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
+        var KeeperEnergyCost = 400;
 
-        var maxHarvesters = 6;
+        var maxHarvesters = 8;
         var harvesters = _.sum(Game.creeps, (creep) => creep.memory.role == 'harvester');
         console.log('Harvesters: ' + harvesters.length);
 
@@ -20,7 +21,7 @@ var deathAndBirth = {
         var upgraders = _.sum(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         console.log('Upgraders: ' + upgraders.length);
 
-        var maxBuilders = 2;
+        var maxBuilders = 1;
         var builders = _.sum(Game.creeps, (creep) => creep.memory.role == 'builder');
         console.log('Builders: ' + builders.length);
 
@@ -41,7 +42,7 @@ var deathAndBirth = {
             console.log('Spawning new harvester: ' + newName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], newName,
             //     {memory: {role: 'harvester', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(energy,'harvester',newName);
+            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'harvester',newName);
 
             if(name == ERR_NOT_ENOUGH_ENERGY && harvesters < 2){
                 name = Game.spawns['Spawn1'].createCustomCreep(
@@ -54,28 +55,28 @@ var deathAndBirth = {
             console.log('Spawning new Upgrader: ' + newUpgraderName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], newUpgraderName,
             //     {memory: {role: 'upgrader', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(energy,'upgrader',newUpgraderName);
+            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'upgrader',newUpgraderName);
         }
         else if(builders < maxBuilders){
             var newBuilderName = 'builder' + Game.time;
             console.log('Spawning new builder: ' + newBuilderName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE], newBuilderName,
             //     {memory: {role: 'builder', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(energy,'builder',newBuilderName);
+            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'builder',newBuilderName);
         }
         else if(repairers < maxRepairers){
             var newRepairerName = 'repairer' + Game.time;
             console.log('Spawning new repairer: ' + newRepairerName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
             //     {memory: {role: 'repairer', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(energy,'repairer',newRepairerName);
+            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'repairer',newRepairerName);
         }
         else if(wallRepairers < maxWallRepairers){
             var newName = 'wallRepairer' + Game.time;
             console.log('Spawning new wallRepairer: ' + newName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
             //     {memory: {role: 'repairer', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(energy,'wallRepairer',newName);
+            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'wallRepairer',newName);
         }
     }
 }
