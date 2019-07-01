@@ -13,7 +13,8 @@ module.exports = function(){
                 body.push(MOVE);
             }
 
-            this.spawnCreep(body,name,{memory: {role: roleName, working: false}});
+            return this.spawnCreep(body,name,
+                {memory: {role: roleName, working: false}});
 
         };
 };

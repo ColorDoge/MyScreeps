@@ -51,6 +51,9 @@ module.exports = {
                         creep.moveTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
                     }
                 }
+                else{
+                    roleUpgrader.run(creep);
+                }
             }
         }
         // if creep is supposed to harvest energy from source
