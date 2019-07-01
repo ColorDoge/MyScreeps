@@ -12,7 +12,7 @@ module.exports = {
         }
 
         if(creep.memory.working) {
-            var wall = creep.room.find(FIND_STRUCTURES, {
+            var walls = creep.room.find(FIND_STRUCTURES, {
                 filter: (wall) => wall.structureType == STRUCTURE_WALL
             });
 
@@ -20,16 +20,29 @@ module.exports = {
 
             for(let percentage = 0.0001; percentage <= 1;
                 percentage = percentage + 0.0001){
-                target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: (s) => s.structureType == STRUCTURE_WALL &&
-                                    s.hits/s.hitsMax == percentage
-                });
+                // target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                //     filter: (s) => s.structureType == STRUCTURE_WALL &&
+                //                     s.hits/s.hitsMax < percentage
+                // });
 
-                if(target == undefined)
+                for(let wall of walls){
+                    if(wall.hits/wall.hitsMax < percentage){
+                        target = wall;
+                        break;
+                    }
+                }
+
+                if(target != undefined)
                 {
                     break;
                 }
             }
+
+            if(target != undefined)[
+                if(creep.repair(target) == ERR_NOT_IN_RANGE){
+                    creep.moveTo(target);
+                }
+            ]
         }
         else {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);

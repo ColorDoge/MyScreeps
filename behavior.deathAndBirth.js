@@ -28,6 +28,10 @@ var deathAndBirth = {
         var repairers = _.sum(Game.creeps, (creep) => creep.memory.role == 'repairer');
         console.log('Repairers: ' + repairers.length);
 
+        var maxWallRepairers = 1;
+        var wallRepairers = _.sum(Game.creeps, (creep) => creep.memory.role == 'wallRepairer');
+        console.log('wallRepairers: ' + wallRepairers.length);
+
         var name = undefined;
 
 
@@ -65,6 +69,13 @@ var deathAndBirth = {
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
             //     {memory: {role: 'repairer', working: false}});
             name = Game.spawns['Spawn1'].createCustomCreep(energy,'repairer',newRepairerName);
+        }
+        else if(wallRepairers < maxWallRepairers){
+            var newName = 'wallRepairer' + Game.time;
+            console.log('Spawning new wallRepairer: ' + newName);
+            // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
+            //     {memory: {role: 'repairer', working: false}});
+            name = Game.spawns['Spawn1'].createCustomCreep(energy,'wallRepairer',newName);
         }
     }
 }
