@@ -17,4 +17,37 @@ module.exports = function(){
                 {memory: {role: roleName, working: false}});
 
         };
+
+    StructureSpawn.prototype.createLongDistanceHarvester =
+        function(energy,numberOfWorkParts,name,home,target,sourceIndex){
+            var body = [];
+            for(let i = 0; i < numberOfWorkParts ; i++){
+                body.push(WORK);
+            }
+
+            energy -= 150*numberOfWorkParts;
+
+            var numberOfParts = Math.floor(energy/100);
+
+            for(let i = 0; i < numberOfPAarts ; i++){
+                body.push(CARRY);
+            }
+            for(let i = 0; i < numberOfPAarts + numberOfWorkParts; i++){
+                body.push(MOVE);
+            }
+
+            return this.spawnCreep(body,name,
+                {memory: {
+                    role: 'longDistanceHarvester',
+                    home: home,
+                    target: target,
+                    sourceIndex: sourceIndex,
+                    working: false}});
+
+        };
+
+    StructureSpawn.prototype.createClaimer =
+        function (target){
+            return this.createCreep([CLAIM,MOVE],undefined,{memory: {role: 'claimer', target: target}});
+        };
 };

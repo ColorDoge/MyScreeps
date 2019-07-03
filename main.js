@@ -4,16 +4,19 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleCarrier = require('role.carrier');
 var roleWallRepairer = require('role.wallRepairer');
+var roleLongDistanceHarvester = require('role.longDistanceHarvester');
+var roleClaimer = require('role.claimer');
+
 var defenderTower = require('defender.tower');
 var deathAndBirth = require('behavior.deathAndBirth');
 
+var HOME = 'W23S22';
 
 
 module.exports.loop = function () {
 
-    var tower = Game.getObjectById('0c9b127beb4cabc081b44d83');
-	defenderTower.run(tower);
 	deathAndBirth.run();
+	defenderTower.defendMyRoom(HOME);
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
@@ -32,5 +35,13 @@ module.exports.loop = function () {
         if(creep.memory.role == 'wallRepairer'){
             roleWallRepairer.run(creep);
         }
+        if(creep.memory.role == 'longDistanceHarvester') {
+            roleLongDistanceHarvester.run(creep);
+        }
+        if(creep.memory.role == 'claimer') {
+            roleClaimer.run(creep);
+        }
     }
+
+
 }
