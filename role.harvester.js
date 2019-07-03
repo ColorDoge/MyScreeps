@@ -43,8 +43,9 @@ module.exports = {
             else{
                 var container = creep.pos.findClosestByPath(FIND_STRUCTURES,
                     {filter: (s) => (
-                        s.structureType == STRUCTURE_CONTAINER &&
-                        s.store.energy < s.storeCapacity)});
+                        s.structureType == (STRUCTURE_CONTAINER||STRUCTURE_STORAGE) &&
+                        (s.store[RESOURCE_ENERGY] < s.storeCapacity))});
+                console.log('container: ' + container);
                 if(container != undefined)
                 {
                     if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)

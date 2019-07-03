@@ -11,27 +11,27 @@ var deathAndBirth = {
         }
 
         var energy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
-        var KeeperEnergyCost = 400;
+        var minEnergy = 500;
 
-        var maxHarvesters = 8;
+        var maxHarvesters = 6;
         var harvesters = _.sum(Game.creeps, (creep) => creep.memory.role == 'harvester');
-        console.log('Harvesters: ' + harvesters.length);
+        console.log('Harvesters: ' + harvesters);
 
-        var maxUpgraders = 4;
+        var maxUpgraders = 3;
         var upgraders = _.sum(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-        console.log('Upgraders: ' + upgraders.length);
+        console.log('Upgraders: ' + upgraders);
 
-        var maxBuilders = 1;
+        var maxBuilders = 2;
         var builders = _.sum(Game.creeps, (creep) => creep.memory.role == 'builder');
-        console.log('Builders: ' + builders.length);
+        console.log('Builders: ' + builders);
 
         var maxRepairers = 2;
         var repairers = _.sum(Game.creeps, (creep) => creep.memory.role == 'repairer');
-        console.log('Repairers: ' + repairers.length);
+        console.log('Repairers: ' + repairers);
 
-        var maxWallRepairers = 1;
+        var maxWallRepairers = 0;
         var wallRepairers = _.sum(Game.creeps, (creep) => creep.memory.role == 'wallRepairer');
-        console.log('wallRepairers: ' + wallRepairers.length);
+        console.log('wallRepairers: ' + wallRepairers);
 
         var name = undefined;
 
@@ -42,7 +42,7 @@ var deathAndBirth = {
             console.log('Spawning new harvester: ' + newName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE], newName,
             //     {memory: {role: 'harvester', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'harvester',newName);
+            name = Game.spawns['Spawn1'].createCustomCreep(minEnergy,'harvester',newName);
 
             if(name == ERR_NOT_ENOUGH_ENERGY && harvesters < 2){
                 name = Game.spawns['Spawn1'].createCustomCreep(
@@ -55,28 +55,28 @@ var deathAndBirth = {
             console.log('Spawning new Upgrader: ' + newUpgraderName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], newUpgraderName,
             //     {memory: {role: 'upgrader', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'upgrader',newUpgraderName);
+            name = Game.spawns['Spawn1'].createCustomCreep(minEnergy,'upgrader',newUpgraderName);
         }
         else if(builders < maxBuilders){
             var newBuilderName = 'builder' + Game.time;
             console.log('Spawning new builder: ' + newBuilderName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE], newBuilderName,
             //     {memory: {role: 'builder', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'builder',newBuilderName);
+            name = Game.spawns['Spawn1'].createCustomCreep(minEnergy,'builder',newBuilderName);
         }
         else if(repairers < maxRepairers){
             var newRepairerName = 'repairer' + Game.time;
             console.log('Spawning new repairer: ' + newRepairerName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
             //     {memory: {role: 'repairer', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'repairer',newRepairerName);
+            name = Game.spawns['Spawn1'].createCustomCreep(minEnergy,'repairer',newRepairerName);
         }
         else if(wallRepairers < maxWallRepairers){
             var newName = 'wallRepairer' + Game.time;
             console.log('Spawning new wallRepairer: ' + newName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
             //     {memory: {role: 'repairer', working: false}});
-            name = Game.spawns['Spawn1'].createCustomCreep(KeeperEnergyCost,'wallRepairer',newName);
+            name = Game.spawns['Spawn1'].createCustomCreep(minEnergy,'wallRepairer',newName);
         }
     }
 }
