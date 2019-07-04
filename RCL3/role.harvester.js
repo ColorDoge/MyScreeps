@@ -18,7 +18,7 @@ module.exports = {
 
         // if creep is supposed to transfer energy to the spawn or an extension
         if (creep.memory.working == true) {
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return ((structure.structureType == STRUCTURE_EXTENSION ||
                                 structure.structureType == STRUCTURE_SPAWN ||
@@ -30,22 +30,22 @@ module.exports = {
                     }
             });
 
-            if(targets.length > 0) {
-                targets.sort(function(a,b){
-                   if(a.structureType == STRUCTURE_EXTENSION){
-                       return -1;
-                   }else{
-                       if(a.structureType == STRUCTURE_CONTAINER||a.structureType == STRUCTURE_STORAGE){
-                           return 1;
-                       }else{
-                           return 0;
-                       }
-                   }
-                });
-                console.log(targets);
+            if(target.length) {
+                // targets.sort(function(a,b){
+                //    if(a.structureType == STRUCTURE_EXTENSION){
+                //        return -1;
+                //    }else{
+                //        if(a.structureType == STRUCTURE_CONTAINER||a.structureType == STRUCTURE_STORAGE){
+                //            return 1;
+                //        }else{
+                //            return 0;
+                //        }
+                //    }
+                // });
+                console.log(target);
 
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
                 }
             }
             else{
