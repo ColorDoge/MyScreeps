@@ -18,46 +18,38 @@ module.exports = {
 
         // if creep is supposed to transfer energy to the spawn or an extension
         if (creep.memory.working == true) {
-            // find closest spawn or extension which is not full
-            var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                // the second argument for findClosestByPath is an object which takes
-                // a property called filter which can be a function
-                // we use the arrow operator to define it
-
-                // filter: (s) => (s.structureType == STRUCTURE_EXTENSION||
-
-                filter: (s) => {
-                    return (s.structureType == STRUCTURE_EXTENSION ||
-                        s.structureType == STRUCTURE_SPAWN||
-                        s.structureType == STRUCTURE_TOWER) &&
-                        s.energy < s.energyCapacity; }
+            var targets = creep.room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return ((structure.structureType == STRUCTURE_EXTENSION ||
+                                structure.structureType == STRUCTURE_SPAWN ||
+                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity)
+                                ||
+                                (structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) < structure.storeCapacity)
+                                ||
+                                (structure.structureType == STRUCTURE_STORAGE && _.sum(structure.store) < structure.storeCapacity);
+                    }
             });
 
-            // if we found one
-            if (structure != undefined) {
-                // try to transfer energy, if it is not in range
-                if(creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    // move towards it
-                    creep.moveTo(structure);
+            if(targets.length > 0) {
+                targets.sort(function(a,b){
+                   if(a.structureType == STRUCTURE_EXTENSION){
+                       return -1;
+                   }else{
+                       if(a.structureType == STRUCTURE_CONTAINER||a.structureType == STRUCTURE_STORAGE){
+                           return 1;
+                       }else{
+                           return 0;
+                       }
+                   }
+                });
+                console.log(targets);
+
+                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0]);
                 }
             }
             else{
-                // Game.rooms[myRoomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
-                var container = Game.rooms[HOME].find(FIND_MY_STRUCTURES,
-                    {filter: (s) => (
-                        s.structureType == (STRUCTURE_CONTAINER||STRUCTURE_STORAGE) &&
-                        (s.store[RESOURCE_ENERGY] < s.storeCapacity))});
-                console.log('container: ' + container);
-                if(container != undefined)
-                {
-                    if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-                    {
-                        creep.moveTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
-                    }
-                }
-                else{
-                    roleUpgrader.run(creep);
-                }
+                roleUpgrader.run(creep);
             }
         }
         // if creep is supposed to harvest energy from source

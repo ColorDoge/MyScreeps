@@ -14,7 +14,7 @@ var deathAndBirth = {
         var energy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
         var minEnergy = 800;
 
-        var maxHarvesters = 3;
+        var maxHarvesters = 5;
         var harvesters = _.sum(Game.creeps, (creep) => creep.memory.role == 'harvester');
         // console.log('Harvesters: ' + harvesters);
 
@@ -22,11 +22,11 @@ var deathAndBirth = {
         var upgraders = _.sum(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         // console.log('Upgraders: ' + upgraders);
 
-        var maxBuilders = 1;
+        var maxBuilders = 0;
         var builders = _.sum(Game.creeps, (creep) => creep.memory.role == 'builder');
         // console.log('Builders: ' + builders);
 
-        var maxRepairers = 2;
+        var maxRepairers = 3;
         var repairers = _.sum(Game.creeps, (creep) => creep.memory.role == 'repairer');
         // console.log('Repairers: ' + repairers);
 

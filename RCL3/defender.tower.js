@@ -28,24 +28,24 @@ module.exports = {
                 }
             }
             // console.log(towers);
-           for(let i in towers){
-            //   console.log(Math.floor(towers.energyCapacity *3)/4);
-            //   console.log(towers[i]);
-                if(towers[i].energy > ((towers[i].energyCapacity *3)/4)){
-                    // console.log("yes!");
-                    //Find the closest damaged Structure
-                    var closestDamagedStructure = towers[i].pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => (((structure.hits < structure.hitsMax)&&
-                                        (structure.structureType != STRUCTURE_WALL))||
-                                        ((structure.structureType == STRUCTURE_WALL)&&
-                                        (structure.hits < 150000)))
-                });
-    	            if(closestDamagedStructure) {
-    	 	            towers[i].repair(closestDamagedStructure);
-    	 	            console.log("The tower is repairing buildings.");
-                    }
-                }
-            }
+           // for(let i in towers){
+           //  //   console.log(Math.floor(towers.energyCapacity *3)/4);
+           //  //   console.log(towers[i]);
+           //      if(towers[i].energy > ((towers[i].energyCapacity *3)/4)){
+           //          // console.log("yes!");
+           //          //Find the closest damaged Structure
+           //          var closestDamagedStructure = towers[i].pos.findClosestByRange(FIND_STRUCTURES, {
+           //          filter: (structure) => (((structure.hits < structure.hitsMax)&&
+           //                              (structure.structureType != STRUCTURE_WALL))||
+           //                              ((structure.structureType == STRUCTURE_WALL)&&
+           //                              (structure.hits < 150000)))
+           //      });
+    	   //          if(closestDamagedStructure) {
+    	 	//             towers[i].repair(closestDamagedStructure);
+    	 	//             console.log("The tower is repairing buildings.");
+           //          }
+           //      }
+           //  }
 
         }
     }

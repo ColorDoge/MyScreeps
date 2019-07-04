@@ -46,6 +46,11 @@ module.exports = function(){
         };
 
     StructureSpawn.prototype.createClaimer =
+        function(energy,numberOfCarryParts){
+            
+        }
+
+    StructureSpawn.prototype.createClaimer =
         function (target,name){
             return this.spawnCreep([CLAIM,MOVE],name,{memory: {role: 'claimer', target: target}});
         };
