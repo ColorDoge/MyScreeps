@@ -1,4 +1,5 @@
 var roleUpgrader = require('role.upgrader')
+var HOME = 'W23S22';
 
 module.exports = {
     // a function to run the logic for this role
@@ -41,7 +42,8 @@ module.exports = {
                 }
             }
             else{
-                var container = creep.pos.findClosestByPath(FIND_STRUCTURES,
+                // Game.rooms[myRoomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
+                var container = Game.rooms[HOME].find(FIND_MY_STRUCTURES,
                     {filter: (s) => (
                         s.structureType == (STRUCTURE_CONTAINER||STRUCTURE_STORAGE) &&
                         (s.store[RESOURCE_ENERGY] < s.storeCapacity))});

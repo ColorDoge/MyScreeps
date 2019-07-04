@@ -12,7 +12,7 @@ var deathAndBirth = {
         }
 
         var energy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
-        var minEnergy = 600;
+        var minEnergy = 800;
 
         var maxHarvesters = 3;
         var harvesters = _.sum(Game.creeps, (creep) => creep.memory.role == 'harvester');
@@ -108,7 +108,8 @@ var deathAndBirth = {
             name = Game.spawns['Spawn1'].createCustomCreep(minEnergy,'wallRepairer',newName);
         }
         else if(Game.spawns['Spawn1'].memory.claimRoom != undefined){
-            name = Game.spawns['Spawn1'].createClaimer(Game.spawns['Spawn1'].memory.claimRoom);
+            var newName = 'claimer' + Game.time;
+            name = Game.spawns['Spawn1'].createClaimer(Game.spawns['Spawn1'].memory.claimRoom,newName);
             if(!(name < 0)){
                 delete Game.spawns['Spawn1'].memory.claimRoom;
             }

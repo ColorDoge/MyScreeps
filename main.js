@@ -20,6 +20,7 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+        // console.log(creep.memory.role);
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
@@ -30,6 +31,7 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
         if(creep.memory.role == 'repairer'){
+            // console.log(creep.room.name);
             roleRepairer.run(creep);
         }
         if(creep.memory.role == 'wallRepairer'){
@@ -39,6 +41,7 @@ module.exports.loop = function () {
             roleLongDistanceHarvester.run(creep);
         }
         if(creep.memory.role == 'claimer') {
+            // console.log(name);
             roleClaimer.run(creep);
         }
     }
