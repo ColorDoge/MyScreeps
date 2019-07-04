@@ -22,34 +22,35 @@ module.exports = {
                     filter: (structure) => {
                         return ((structure.structureType == STRUCTURE_EXTENSION ||
                                 structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity)
-                                ||
-                                (structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) < structure.storeCapacity)
-                                ||
-                                (structure.structureType == STRUCTURE_STORAGE && _.sum(structure.store) < structure.storeCapacity);
+                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity);
                     }
             });
 
-            if(target.length) {
-                // targets.sort(function(a,b){
-                //    if(a.structureType == STRUCTURE_EXTENSION){
-                //        return -1;
-                //    }else{
-                //        if(a.structureType == STRUCTURE_CONTAINER||a.structureType == STRUCTURE_STORAGE){
-                //            return 1;
-                //        }else{
-                //            return 0;
-                //        }
-                //    }
-                // });
-                console.log(target);
-
+            if(target) {
+                // console.log("target");
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 }
             }
             else{
-                roleUpgrader.run(creep);
+
+                // roleUpgrader.run(creep);
+                var LargeStorageEquipment = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return ((structure.structureType == STRUCTURE_CONTAINER||
+                                structure.structureType == STRUCTURE_STORAGE) &&
+                                _.sum(structure.store) < structure.storeCapacity);
+                        }
+                });
+                if(LargeStorageEquipment) {
+                    // console.log("LargeStorageEquipment");
+                    if(creep.transfer(LargeStorageEquipment, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(LargeStorageEquipment);
+                    }
+                }
+                else{
+                    roleUpgrader.run(creep);
+                }
             }
         }
         // if creep is supposed to harvest energy from source
