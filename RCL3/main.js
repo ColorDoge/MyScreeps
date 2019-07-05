@@ -10,6 +10,8 @@ var roleClaimer = require('role.claimer');
 var defenderTower = require('defender.tower');
 var deathAndBirth = require('behavior.deathAndBirth');
 
+require('prototype.creep');
+
 var HOME = 'W23S22';
 
 
@@ -44,6 +46,9 @@ module.exports.loop = function () {
             // console.log(name);
             roleClaimer.run(creep);
         }
+		if(creep.memory.role == 'raider'){
+			creep.raiding();
+		}
     }
 
 

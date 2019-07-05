@@ -42,10 +42,11 @@ var deathAndBirth = {
         // var longDistanceHarvestersOfW23S22 = _.sum(Game.creeps, (creep) => creep.memory.role == 'longDistanceHarvesterW23S22');
         // console.log('longDistanceHarvestersOfW23S22: ' + longDistanceHarvestersOfW23S22);
 
-        // var  = 0;
+        // var  = 0;s
         // var wallRepairers = _.sum(Game.creeps, (creep) => creep.memory.role == 'wallRepairer');
         // console.log('wallRepairers: ' + wallRepairers);
-
+        var maxRaider = 3;
+        var raiders = _.sum(Game.creeps, (creep) => creep.memory.role == 'raider');
         var name = undefined;
 
 
@@ -113,6 +114,13 @@ var deathAndBirth = {
             if(!(name < 0)){
                 delete Game.spawns['Spawn1'].memory.claimRoom;
             }
+        }
+        else if(raiders < maxRaider){
+            // var newName = 'Raider' + Game.time;
+            // console.log('Spawning new wallRepairer: ' + newName);
+            // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
+            //     {memory: {role: 'repairer', working: false}});
+            createRaider(Game.spawns['Spawn1']);
         }
 
     }

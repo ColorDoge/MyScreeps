@@ -51,7 +51,7 @@ module.exports = function(){
             return this.spawnCreep([CLAIM,MOVE],name,{memory: {role: 'claimer', target: target}});
         };
 
-    StructureSpawn.prototype.createAttacker =
+    StructureSpawn.prototype.createRaider =
         function(){
             const energyCapacity = this.room.energyCapacityAvailable;
             const mediumEnergyCapacity = 550;
