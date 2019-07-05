@@ -72,6 +72,7 @@ function produceRaider(spawn) {
     const creepsAssignedToFlags = _.filter(Game.creeps, (creep) =>
       creep.memory.raidingTargetFlag !== undefined
     );
+    console.log('yes!');
     const unclaimedFlags = _.filter(Game.flags, (flag) =>
       flag.name.startsWith('RaidingFlag') &&
         _.filter(creepsAssignedToFlags, (creep) =>

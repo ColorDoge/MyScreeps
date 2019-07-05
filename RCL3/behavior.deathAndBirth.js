@@ -120,7 +120,7 @@ var deathAndBirth = {
             // console.log('Spawning new wallRepairer: ' + newName);
             // Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newRepairerName,
             //     {memory: {role: 'repairer', working: false}});
-            createRaider(Game.spawns['Spawn1']);
+            Game.spawns['Spawn1'].createRaider();
         }
 
     }
