@@ -1,6 +1,9 @@
 var roleUpgrader = {
 
-    /** @param {Creep} creep **/
+    /**
+     * 升级者：提高房间等级
+     * @param creep
+     */
     run: function(creep) {
 
         if(creep.memory.upgrading && creep.carry.energy == 0) {

@@ -3,7 +3,6 @@ module.exports = {
     //TOWER CODE
     defendMyRoom: function(myRoomName) {
 
-
         var hostiles = Game.rooms[myRoomName].find(FIND_HOSTILE_CREEPS);
         var towers = Game.rooms[myRoomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
 

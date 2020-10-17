@@ -1,6 +1,10 @@
 var roleRepairer = require('role.repairer');
 
 module.exports = {
+    /**
+     * 高级工程师：对墙面进行修理
+     * @param creep
+     */
     run:function(creep){
         if(creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;

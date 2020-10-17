@@ -2,7 +2,10 @@ var roleBuilder = require("role.builder");
 
 var roleRepairer = {
 
-    /** @param {Creep} creep **/
+    /**
+     * 工程师：高级建筑工，建造和修理当前房间的建筑
+     * @param creep
+     */
     run: function(creep) {
 
         if(creep.memory.working && creep.carry.energy == 0) {
