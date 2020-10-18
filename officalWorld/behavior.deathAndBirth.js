@@ -11,7 +11,7 @@ var deathAndBirth = {
         }
 
         var energy = Game.spawns['Spawn1'].room.energyCapacityAvailable;
-        var minEnergy = 600;
+        var minEnergy = 300;
 
         var maxHarvesters = 4;
         var harvesters = _.sum(Game.creeps, (creep) => creep.memory.role == 'harvester');

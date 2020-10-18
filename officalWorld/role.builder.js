@@ -8,19 +8,6 @@ module.exports = {
      */
     run: function(creep) {
 
-        // 殖民?
-        // if(creep.memory.target !== undefined&&creep.room.name !== creep.memory.target){
-        //     var exit = creep.room.findExitTo(creep.memory.target);
-        //     creep.moveTo(creep.pos.findClosestByRange(exit));
-        // }
-        // else{
-        //     if(creep.claimController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-        //         // move towards the controller
-        //         creep.moveTo(creep.room.controller);
-        //     }
-        // }
-
-
         // if creep is trying to complete a constructionSite but has no energy left
         if (creep.memory.working === true && creep.carry.energy === 0) {
             // switch state
